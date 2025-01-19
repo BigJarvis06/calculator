@@ -49,17 +49,27 @@ body {
 .additions {
   margin: 1rem;
   box-sizing: border-box;
+  display: flex;
+  width: 20rem;
+  justify-content: space-between;
 }
 
 .additions #backspace {
-  box-sizing: border-box;
   height: 4rem;
   width: 8.5rem;
   align-self: flex-end;
+}
+
+.additions #decimal {
+  margin-right: auto;
+}
+
+.additions button {
   color: rgb(255, 115, 0);
   border: 3px solid rgb(255, 115, 0);
   background: rgb(20,20,20);
   background: linear-gradient(0deg, rgba(20,20,20,1) 0%, rgba(0,0,0,1) 100%);
+  box-sizing: border-box;
 }
 
 #arguments {
