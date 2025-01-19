@@ -17,6 +17,10 @@ const divide = function(a, b) {
 	return a / b;
 }
 
+const remainder = function(a, b) {
+  return a % b;
+}
+
 const inputs = {
 "firstNum" : "",
 "secondNum" : "",
@@ -29,19 +33,28 @@ function operate(a, b, op) {
 	a = Number(inputs.firstNum);
 	b = Number(inputs.secondNum);
 	op = inputs.operator;
+  let result;
 	switch (op) {
 		case add:
-				return add(a, b);
+				result = add(a, b);
+        return String(result).length > 10 ? result.toFixed(10) : result;
 			break;
 		case subtract:
-				return subtract(a, b);
+				result = subtract(a, b);
+        return String(result).length > 10 ? result.toFixed(10) : result;
 			break;
 		case multiply:
-				return multiply(a, b);
+				result = multiply(a, b);
+        return String(result).length > 10 ? result.toFixed(10) : result;
 			break;
 		case divide:
-				return divide(a, b);
+				result = divide(a, b);
+        return String(result).length > 10 ? result.toFixed(10) : result;
 			break;
+    case remainder:
+      result = remainder(a, b);
+      return String(result).length > 10 ? result.toFixed(10) : result;
+      break;
 		default:
 			break;
 	}
@@ -59,6 +72,7 @@ const changeDisplay = function(a) {
 		case buttons.subtract.textContent:
 		case buttons.multiply.textContent:
 		case buttons.divide.textContent:
+    case buttons.remainder.textContent:
 		case operate:
 			display.textContent = a;
 			break;
@@ -67,6 +81,7 @@ const changeDisplay = function(a) {
 				display.textContent.includes(buttons.subtract.textContent) ||
 				display.textContent.includes(buttons.multiply.textContent) ||
 				display.textContent.includes(buttons.divide.textContent) ||
+        display.textContent.includes(buttons.remainder.textContent) ||
 				inputs.result === true)
 				{
 				inputs.result = false;
@@ -100,10 +115,12 @@ const buttons = {
 	zero : document.querySelector(".number-zero"),
 	clear : document.querySelector("#clear"),
 	equals : document.querySelector("#equals"),
-  backSpace : document.querySelector("#backspace")
+  backSpace : document.querySelector("#backspace"),
+  decimal : document.querySelector("#decimal"),
+  remainder : document.querySelector("#remainder")
 }
 
-// event listeners
+// number and decimal sorting functions
 
 function checkOp(num) {
 	if (!inputs.operator) {
@@ -112,6 +129,18 @@ function checkOp(num) {
 		inputs.secondNum += num;
 	}
 }
+
+function checkDec() {
+    if (!inputs.firstNum.includes(".") && !inputs.operator) {
+      inputs.firstNum += ".";
+      changeDisplay(".");
+  } else if (!inputs.secondNum.includes(".") && inputs.operator) {
+      inputs.secondNum += ".";
+      changeDisplay(".");
+  }
+}
+
+// event listeners
 
 Object.keys(buttons).forEach(button => {
 	addEventListener("click", event => {
@@ -168,6 +197,10 @@ Object.keys(buttons).forEach(button => {
 					checkOp("0");
 					event.stopImmediatePropagation();
 				break;
+      case "decimal":
+          checkDec();
+          event.stopImmediatePropagation();
+        break;
 // operations
 			case "clear":
 					clearDisplay();
@@ -210,8 +243,14 @@ Object.keys(buttons).forEach(button => {
 					event.stopImmediatePropagation();
 				break;
       case "backspace":
-        backspace();
-        event.stopImmediatePropagation();
+          backspace();
+          event.stopImmediatePropagation();
+        break;
+      case "remainder":
+          changeDisplay(buttons.remainder.textContent);
+          inputs.operator = remainder;
+          event.stopImmediatePropagation();
+        break;
 		}
 	})
 })
