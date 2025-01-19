@@ -99,7 +99,8 @@ const buttons = {
 	nine : document.querySelector(".number-nine"),
 	zero : document.querySelector(".number-zero"),
 	clear : document.querySelector("#clear"),
-	equals : document.querySelector("#equals")
+	equals : document.querySelector("#equals"),
+  backSpace : document.querySelector("#backspace")
 }
 
 // event listeners
@@ -208,6 +209,9 @@ Object.keys(buttons).forEach(button => {
 					inputs.operator = divide;
 					event.stopImmediatePropagation();
 				break;
+      case "backspace":
+        backspace();
+        event.stopImmediatePropagation();
 		}
 	})
 })
@@ -220,7 +224,7 @@ function backspace() {
 	  	display.textContent = display.textContent.slice(0, -1);
   } else if (inputs.operator) {
         inputs.operator = undefined;
-        display.textContent = display.textContent.slice(0, -1);
+        display.textContent = inputs.firstNum;
     } else if (inputs.firstNum) {
           inputs.firstNum = inputs.firstNum.slice(0, -1);
           display.textContent = display.textContent.slice(0, -1);
