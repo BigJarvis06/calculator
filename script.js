@@ -212,4 +212,19 @@ Object.keys(buttons).forEach(button => {
 	})
 })
 
+// backspace function
+
+function backspace() {
+  if (inputs.secondNum) {
+		  inputs.secondNum = inputs.secondNum.slice(0, -1);
+	  	display.textContent = display.textContent.slice(0, -1);
+  } else if (inputs.operator) {
+        inputs.operator = undefined;
+        display.textContent = display.textContent.slice(0, -1);
+    } else if (inputs.firstNum) {
+          inputs.firstNum = inputs.firstNum.slice(0, -1);
+          display.textContent = display.textContent.slice(0, -1);
+      }
+}
+
 //
