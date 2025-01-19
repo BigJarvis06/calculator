@@ -10,14 +10,14 @@ body {
 #container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   background: rgb(13,19,33);
   background: linear-gradient(0deg, rgba(13,19,33,1) 0%, rgba(33,39,53,1) 100%);
   margin: 4rem;
   border: 4px solid rgb(13, 19, 33);
   border-radius: 1rem;
-  max-height: 480px;
-  max-width: 360px;
+  max-height: 540px;
+  flex-wrap: wrap;
 }
 
 #display {
@@ -43,6 +43,23 @@ body {
   height: 18rem;
   width: 20rem;
   margin: 1rem;
+  margin-bottom: 0;
+}
+
+.additions {
+  margin: 1rem;
+  box-sizing: border-box;
+}
+
+.additions #backspace {
+  box-sizing: border-box;
+  height: 4rem;
+  width: 8.5rem;
+  align-self: flex-end;
+  color: rgb(255, 115, 0);
+  border: 3px solid rgb(255, 115, 0);
+  background: rgb(20,20,20);
+  background: linear-gradient(0deg, rgba(20,20,20,1) 0%, rgba(0,0,0,1) 100%);
 }
 
 #arguments {
