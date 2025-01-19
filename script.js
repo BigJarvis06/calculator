@@ -20,7 +20,8 @@ const divide = function(a, b) {
 const inputs = {
 "firstNum" : "",
 "secondNum" : "",
-"operator" : undefined
+"operator" : undefined,
+"result" : false
 }
 // operate function
 
@@ -58,8 +59,6 @@ const changeDisplay = function(a) {
 		case buttons.subtract.textContent:
 		case buttons.multiply.textContent:
 		case buttons.divide.textContent:
-			display.textContent = a;
-			break;
 		case operate:
 			display.textContent = a;
 			break;
@@ -67,8 +66,10 @@ const changeDisplay = function(a) {
 			if (display.textContent.includes(buttons.add.textContent) ||
 				display.textContent.includes(buttons.subtract.textContent) ||
 				display.textContent.includes(buttons.multiply.textContent) ||
-				display.textContent.includes(buttons.divide.textContent)) 
+				display.textContent.includes(buttons.divide.textContent) ||
+				inputs.result === true)
 				{
+				inputs.result = false;
 				display.textContent = "";
 				display.textContent += a;
 			} else {
@@ -181,6 +182,7 @@ Object.keys(buttons).forEach(button => {
 							inputs.firstNum = "";
 							inputs.secondNum = "";
 							inputs.operator = undefined;
+							inputs.result = true;
 								event.stopImmediatePropagation();
 						} else {
 						break;
@@ -189,7 +191,6 @@ Object.keys(buttons).forEach(button => {
 			case "add":
 					changeDisplay(buttons.add.textContent);
 					inputs.operator = add;
-					console.log("add")
 					event.stopImmediatePropagation();
 				break;
 			case "subtract":
